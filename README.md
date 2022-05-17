@@ -5,10 +5,10 @@ This set of scripts can help you transferring python script and setting file to 
 # How to use
 
 ## 0. System Requirements
-|  |  | Local PC| Remote Machine |
-| :-: | - | - | - |
-| Software |  | ssh server | tmux<br/>scp |
-| Python<br/>module |  | socket<br/>argparse | socket<br/>argparse<br/>configparser<br/>subprocess<br/>watchdog |
+|  | Local PC| Remote Machine |
+| :-: | - | - |
+| Software | ssh server | tmux<br/>scp |
+| Python<br/>module | socket<br/>argparse | socket<br/>argparse<br/>configparser<br/>subprocess<br/>watchdog |
 
 ## 1. Enviornment setup
 Turn on SSH server function on local PC in order to receive result files from remote machine. Put files in "Local" folder on local PC and files in "Remote" folder on remote machine. Run socket-server.py and result-collector.py on remote machine with command below. Remember to edit machine_info.ini to meet your working enviornment, such as IP, port, paths of some folders.
