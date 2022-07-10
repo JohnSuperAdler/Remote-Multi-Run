@@ -1,17 +1,17 @@
-# Remote-Multi-Run
+# Remote-Parallel-Data-Processing
 
-This set of scripts can help you transferring python script and setting file to remote machine and generate multiple runs in individual windows easily. Result files of executed script will be automatically returned to local PC.
+This set of scripts can help you transferring python script and setting file to remote machine and generate multiple runs in individual windows easily. Outputted files will be automatically returned to local PC.
 
 # How to use
 
 ## 0. System Requirements
-|  | Local PC| Remote Machine |
+|  | Local PC| Remote Server |
 | :-: | - | - |
 | Software | ssh server | tmux<br/>scp |
 | Python<br/>module | socket<br/>argparse | socket<br/>argparse<br/>configparser<br/>subprocess<br/>watchdog |
 
 ## 1. Enviornment setup
-Turn on SSH server function on local PC in order to receive result files from remote machine. Put files in "Local" folder on local PC and files in "Remote" folder on remote machine. Run socket-server.py and result-collector.py on remote machine with command below. Remember to edit machine_info.ini to meet your working enviornment, such as IP, port, paths of some folders.
+Turn on SSH server function on local PC in order to receive outputted files from remote server. Put files in "Local" folder on local PC and files in "Remote" folder on remote server. Run socket-server.py and result-collector.py on remote server with command below. Remember to edit machine_info.ini to meet your working enviornment, such as IP, port, paths of some folders.
 
 ```
 $ python socket-server.py machine_info.ini
@@ -22,11 +22,11 @@ $ python result-collector.py machine_info.ini
 - Remember to open firewall port for ssh and socket service.
 - In order to avoid entering password every time new file being transfered, creating public and private key pair is recommanded. You can refer to [this article](https://alvinalexander.com/linux-unix/how-use-scp-without-password-backups-copy/).
 
-## 2. Run Remote-Multi-Run.py
+## 2. Run RPDP.py
 
-1. Run Remote-Multi-Run.py on local PC with options below:
+1. Run RPDP.py on local PC with options below:
     ```
-    $ python script-spreader.py <path of script file> <path of config file>
+    $ python RPDP.py <path of script file> <path of config file>
     ```
     options:
 
@@ -38,15 +38,15 @@ $ python result-collector.py machine_info.ini
     | -p | --port | 7788 | Port for accessing remote machine. |
     | -cs | --copyscript | - | Would copy script file from local if applied |
     | -cc | --copyconfig | - | Would copy config file from local if applied |
-2. Remote machine starts working on generating multi-window session and bash script automatically right after messeges and files received.
+2. Remote server starts working on generating multi-window sessions and shell script automatically right after messeges and files received.
 3. Remote machine starts running received script file.
-4. Result files will be transfered to local PC automatically due to the monitoring of result-collector.py.
+4. Outputted files will be transfered to local PC automatically due to the monitoring of result-collector.py.
 
 ### Notice that:
-- In current version result-collector.py only supports monitoring folder generation. It detects folder generated in specified output directory and transfers all the files contained in the folder recursively. This is due to the private usage of the author and will be updated to file-generation compatible in the future.
+- In current version result-collector.py only supports monitoring folder generation. It detects folder generated in output directory and transfers all the files contained in the folder recursively. This is due to the private usage of the author and will be updated to file-generation compatible in the future.
 - Files won't be transfered right after generated. We set a buffer time (60 sec.) for waiting file generation complete.
 
-![workflow of Remote-Multi-Run](ss_img01.png)
+![workflow of RPDP](ss_img01.png)
 
 # Screenshots
 
